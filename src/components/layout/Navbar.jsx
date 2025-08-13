@@ -20,7 +20,7 @@ function Navbar() {
   };
 
   return (
-    <header className="relative bg-black/80 backdrop-blur w-full sticky top-0 z-50">
+    <header className="relative bg-black/50 backdrop-blur w-full sticky top-0 z-50">
       {/* Navbar */}
       <nav className="text-white text-lg p-4 flex justify-between items-center">
         {/* Logo */}
