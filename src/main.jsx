@@ -1,15 +1,18 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { InfoModalProvider } from "./components/context/InfoModalContext.jsx";
+import { InfoModalProvider } from "./context/InfoModalContext";
+import { WatchlistContextProvider } from "./context/WatchListContext"; 
 import "./index.css";
-import App from "./App.jsx";
+import App from "./App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <InfoModalProvider>
-        <App />
+        <WatchlistContextProvider>
+          <App />
+        </WatchlistContextProvider>
       </InfoModalProvider>
     </BrowserRouter>
   </StrictMode>

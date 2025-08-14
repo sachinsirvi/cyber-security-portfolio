@@ -1,26 +1,28 @@
-import React, { createContext, useState } from "react";
+import React, {createContext, useState} from "react";
+
 
 const InfoModalContext = createContext();
 
-const InfoModalProvider = ({ children }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [modalContent, setModalContent] = useState(null);
+function InfoModalProvider({children}){
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalData, setModalData] = useState(null); // State to hold movie details
 
-  const openModal = (data) => {
-    setModalContent(data);
-    setIsModalOpen(true);
-  };
+      // Function to open the modal with movie details
+    const openModal = (data) => {
+        setModalData(data); 
+        setIsModalOpen(true); 
+      };
+    
+      const closeModal = () => {
+        setModalData(null); // Clear the movie details
+        setIsModalOpen(false); // Close the modal
+      };
+    return(
+        <InfoModalContext.Provider value={{isModalOpen, modalData, openModal, closeModal }}>
+            {children}
+        </InfoModalContext.Provider>
+    )
 
-  const closeModal = () => {
-    setModalContent(null);
-    setIsModalOpen(false);
-  }
+}
 
-  return (
-    <InfoModalContext.Provider value={{ isModalOpen, openModal, closeModal , modalContent}}>
-      {children}
-    </InfoModalContext.Provider>
-  );
-};
-
-export { InfoModalContext, InfoModalProvider };
+export {InfoModalContext, InfoModalProvider};

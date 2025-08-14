@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import fetchTmdbApi from "../../api/tmdb";
 import MovieCard from "../common/MovieCard";
 import { imgBaseUrl } from "../../lib/constants";
+import { InfoModalContext } from "../../context/InfoModalContext";
 
 function TvRow({ endpoint, title }) {
   const [data, setData] = useState([]);
   const scrollContainerRef = useRef(null);
+  const { openModal } = useContext(InfoModalContext);
 
   useEffect(() => {
     fetchTmdbApi(endpoint)
@@ -33,6 +35,16 @@ function TvRow({ endpoint, title }) {
     }
   };
 
+  const handleCardClick = (movie) => {
+    openModal({
+      Title: movie.title,
+      Description: movie.overview,
+      VideoId:movie.id,
+      vote_average: movie.vote_average,
+      popularity: movie.popularity,
+    });
+  };
+
   return (
     <div className="p-4  relative">
       <h1 className=" text-gray-400 text-xl  ">{title}</h1>
@@ -47,10 +59,16 @@ function TvRow({ endpoint, title }) {
               ? movie.backdrop_path
               : movie.poster_path;
             return (
-              <div key={movie.id} className="min-w-[160px] md:min-w-[250px] ">
+              <div
+                key={movie.id}
+                className="min-w-[160px] md:min-w-[250px] "
+                onClick={() => handleCardClick(movie)}
+              >
                 <MovieCard
                   imgSrc={`${imgBaseUrl}${imgPath}`}
-                  title={movie.name}
+                  title={movie.title || movie.name}
+                  data={movie}
+
                 />
               </div>
             );

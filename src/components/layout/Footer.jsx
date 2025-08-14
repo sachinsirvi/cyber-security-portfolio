@@ -2,9 +2,12 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="bg-black text-gray-400 text-center p-4 border-t border-yellow-300 flex flex-col md:flex-row justify-between items-center gap-3 p-5">
-      <p className="text-sm md:text-base">
-        © {new Date().getFullYear()} <span className="text-yellow-300 font-semibold">ViteFlix</span> · Built with <span className="text-red-500">♡</span> by Sachin Sirvi
+    <footer className="bg-slate-950 text-gray-400 text-center p-4 border-t border-gray-700 flex flex-col md:flex-row justify-center items-center gap-3 ">
+      <p className="">
+        © {new Date().getFullYear()} <span className="text-gray-300 font-semibold">Premiere.AI</span>
+      </p>
+      <p className="">
+       Built with <span className="text-gray-500">♡</span> by Sachin Sirvi
       </p>
       <ul className="flex space-x-4 text-xl">
         <li>

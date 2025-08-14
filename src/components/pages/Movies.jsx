@@ -9,7 +9,6 @@ function Movies() {
      <MoviesRow endpoint={END_POINTS.movie.now_playing} title={"Now Playing Movies"}/>
      <MoviesRow endpoint={END_POINTS.movie.top_rated} title={"Top Rated Movies"}/>
      <MoviesRow endpoint={END_POINTS.movie.popular} title={"Popular Movies"}/>
-    
      <MoviesRow endpoint={END_POINTS.movie.upcoming} title={"Upcoming Movies"}/>
     </>
    

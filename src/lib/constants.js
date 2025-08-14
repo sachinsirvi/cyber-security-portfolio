@@ -35,3 +35,5 @@ export const END_POINTS = {
 
 
 export const imgBaseUrl = "https://image.tmdb.org/t/p/original";
+export const videoBaseUrl = "https://api.themoviedb.org/3/movie";
+

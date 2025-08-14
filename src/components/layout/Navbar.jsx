@@ -5,9 +5,10 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   // nav links array
   const navlinks = [
+    {name: "Search", path: "/search"},
     { name: "Home", path: "/", end: true },
     { name: "Movies", path: "/movies" },
-    { name: "TV", path: "/tvshows" },
+    { name: "TV Shows", path: "/tvshows" },
     { name: "Watchlist", path: "/watchlist" },
   ];
   // navlink classname(helper function)
@@ -22,10 +23,10 @@ function Navbar() {
   return (
     <header className="relative bg-black/50 backdrop-blur w-full sticky top-0 z-50">
       {/* Navbar */}
-      <nav className="text-white text-lg p-4 flex justify-between items-center">
+      <nav className="text-white  p-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-yellow-300">
-          ViteFlix
+        <Link to="/" className="text-lg font-semibold text-gray-300 hover:text-yellow-300 transition-colors duration-300">
+        Premiere.AI
         </Link>
         {/* Mobile Navigation Links */}
         <button
@@ -41,7 +42,7 @@ function Navbar() {
         </button>
 
         {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex space-x-2">
+        <ul className="hidden md:flex space-x-4">
           {navlinks.map((item) => {
             return (
               <li key={item.path}>
