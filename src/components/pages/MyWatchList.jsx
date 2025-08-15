@@ -4,7 +4,7 @@ import MovieCard from "../common/MovieCard";
 import { imgBaseUrl } from "../../lib/constants";
 
 function MyWatchList() {
-  const { watchList } = useContext(WatchListContext); // <-- capital L
+  const { watchList } = useContext(WatchListContext); 
 
   if (!watchList?.length) {
     return <h2>Your watchlist is empty.</h2>;
@@ -13,7 +13,7 @@ function MyWatchList() {
   return (
     <div className=" flex flex-col items-center ">
       <h1 className="p-4 ">My Watchlist</h1>
-      <div className="grid grid-cols-3 md:grid-cols-5  gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-5  gap-4 p-4">
         {watchList.map((movie) => {
           const isLargeScreen = window.innerWidth >= 1024;
           const imgPath = isLargeScreen

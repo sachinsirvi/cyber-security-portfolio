@@ -7,7 +7,7 @@ import InfoModal from "./components/common/InfoModal.jsx";
 import { Routes, Route } from "react-router-dom";
 
 // Lazy-load route pages to reduce initial bundle
-const Banner = lazy(() => import("./components/pages/Home/Banner.jsx"));
+const Banner = lazy(() => import("./components/pages/Banner.jsx"));
 const Movies = lazy(() => import("./components/pages/Movies.jsx"));
 const Tv = lazy(() => import("./components/pages/Tv.jsx"));
 const MyWatchList = lazy(() => import("./components/pages/MyWatchList.jsx"));

@@ -1,18 +1,32 @@
 import React, { useEffect, useState, useContext } from "react";
-import { imgBaseUrl } from "../../../lib/constants";
-import { END_POINTS } from "../../../lib/constants";
-import fetchTmdbApi from "../../../api/tmdb";
-import { InfoModalContext } from "../../../context/InfoModalContext";
+import { imgBaseUrl } from "../../lib/constants";
+import { END_POINTS } from "../../lib/constants";
+import fetchTmdbApi from "../../api/tmdb";
+import { InfoModalContext } from "../../context/InfoModalContext";
 
 function Banner() {
   const [data, setData] = useState([]);
   const { openModal } = useContext(InfoModalContext);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
     fetchTmdbApi(END_POINTS.movie.top_rated)
       .then((data) => setData(data.results || []))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
+    // Large Screen Check
+    useEffect(() => {
+      const handleResize = () => {
+        window.innerWidth >= 1024
+          ? setIsLargeScreen(true)
+          : setIsLargeScreen(false);
+      };
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
 
   const handleCardClick = (data) => {
     openModal({
@@ -29,7 +43,7 @@ function Banner() {
       <div className="relative bg-black  w-full h-[92vh] flex justify-center items-center mb-2 ">
         <img
           src={`${imgBaseUrl}${
-            window.innerWidth >= 1024
+            isLargeScreen
               ? data[0].backdrop_path
               : data[0].poster_path
           }`}

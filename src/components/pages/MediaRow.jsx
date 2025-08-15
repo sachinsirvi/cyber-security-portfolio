@@ -18,7 +18,6 @@ function MoviesRow({ endpoint, title }) {
     const signal = controller.signal;
 
     setLoading(true);
-
     fetchTmdbApi(endpoint, signal)
       .then((data) => {
         setData(data.results ?? []);
@@ -69,7 +68,8 @@ function MoviesRow({ endpoint, title }) {
       });
     }
   };
-
+  
+  // handle card click
   const handleCardClick = (movie) => {
     openModal({
       Title: movie.title,
@@ -80,37 +80,43 @@ function MoviesRow({ endpoint, title }) {
     });
   };
 
-  {
-    loading;
-  }
+  // Render
   return (
-    <div className="p-4  relative">
-      <h1 className=" text-gray-400 text-xl  ">{title}</h1>
-      <div className=" overflow-x-auto ">
+    <div className="p-4 relative">
+      <h1 className="text-neutral-400 text-lg">{title}</h1>
+      <div className="overflow-x-auto">
         <div
           ref={scrollContainerRef}
-          className="flex p-2 space-x-2 overflow-x-auto scrollbar-hide "
+          className="flex p-2 space-x-4 overflow-x-auto scrollbar-hide"
         >
           {loading ? (
-           <div className="w-full h-56 flex justify-center items-center">
-           <Spinner />
-         </div>
-            
+            <div className="w-full h-56 flex justify-center items-center">
+              <Spinner />
+            </div>
           ) : (
             data.map((movie) => {
-              const imgPath = isLargeScreen
-                ? movie.backdrop_path
-                : movie.poster_path;
+              let imgPath = null;
+              let isPortrait = false;
+
+              if (isLargeScreen && movie.backdrop_path) {
+                imgPath = movie.backdrop_path;
+                isPortrait = false;
+              } else if (!isLargeScreen && movie.poster_path) {
+                imgPath = movie.poster_path;
+                isPortrait = true;
+              }
+
               return (
                 <div
                   key={movie.id}
-                  className="min-w-[160px] md:min-w-[250px] "
+                  className="min-w-[200px] md:min-w-[250px] "
                   onClick={() => handleCardClick(movie)}
                 >
                   <MovieCard
-                    imgSrc={`${imgBaseUrl}${imgPath}`}
+                    imgSrc={imgPath ? `${imgBaseUrl}${imgPath}` : null}
                     title={movie.title || movie.name}
                     data={movie}
+                    isPortrait={isPortrait}
                   />
                 </div>
               );

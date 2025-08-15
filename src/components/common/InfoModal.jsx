@@ -45,8 +45,8 @@ function InfoModal() {
           X
         </button>
         {/* Content */}
-        <div className="flex  flex-col  w-full max-w-4xl  bg-black/80 ">
-          <div className="w-full aspect-video flex items-center justify-center border-b border-gray-800 ">
+        <div className="flex  flex-col  w-full max-w-4xl  bg-neutral-900 rounded-md ">
+          <div className="w-full aspect-video flex items-center justify-center ">
             {videoKey ? (
               <iframe
                 width="100%"
@@ -55,13 +55,14 @@ function InfoModal() {
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                className="rounded-md border-b border-neutral-600"
               ></iframe>
             ) : (
               <Spinner />
             )}
           </div>
 
-          <div className="w-full p-2 font-semibold text-center text-gray-300 border-b border-gray-800 flex flex-row justify-between items-center ">
+          <div className="w-full p-2 font-semibold text-center text-gray-300 border-b border-neutral-600 flex flex-row justify-between items-center ">
             {/* Rating */}
             <span className="flex items-center gap-1">
               <i className="fa-solid fa-star text-yellow-400"></i>
@@ -71,7 +72,7 @@ function InfoModal() {
             </span>
 
             {/* Title */}
-            <span className="text-lg font-bold">
+            <span className="text-lg font-bold ">
               {modalData.Title || "No Title Available"}
             </span>
 

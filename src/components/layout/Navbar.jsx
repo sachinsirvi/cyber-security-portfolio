@@ -13,7 +13,7 @@ function Navbar() {
   ];
   // navlink classname(helper function)
   const navlinkClassname = ({ isActive }) => {
-    return isActive ? "text-yellow-300" : "text-white";
+    return isActive ? "text-yellow-300" : "text-neutral-400";
   };
 
   const toggleMenu = () => {
@@ -25,7 +25,7 @@ function Navbar() {
       {/* Navbar */}
       <nav className="text-white  p-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-lg font-semibold text-gray-300 hover:text-yellow-300 transition-colors duration-300">
+        <Link to="/" className="text-lg font-semibold text-neutral-300 hover:text-yellow-300 transition-colors duration-300">
         Premiere.AI
         </Link>
         {/* Mobile Navigation Links */}
@@ -61,7 +61,7 @@ function Navbar() {
 
       {/* Mobile Navigation Links */}
       {menuOpen && (
-        <div className="md:hidden absolute flex flex-col items-center bg-black/80 backdrop-blur text-white p-4 top-full  p-2 top-0 right-0  border-t border-yellow-300 w-1/3">
+        <div className="md:hidden absolute flex flex-col items-center bg-black/90 backdrop-blur text-white p-4 top-full  top-0 right-0  border-t border-yellow-300 w-1/2 ">
           <ul className="space-y-2">
             {navlinks.map((item) => {
               return (
