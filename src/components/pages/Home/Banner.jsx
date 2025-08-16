@@ -2,22 +2,27 @@ import React, { useEffect, useState, useContext } from "react";
 import { imgBaseUrl, END_POINTS } from "../../../lib/constants";
 import fetchTmdbApi from "../../../api/tmdb";
 import { InfoModalContext } from "../../../context/InfoModalContext";
-import Spinner from "../../common/Spinner";
+import SkeletonHero from "../../common/SkeletonBanner";
 import ImageWithFallback from "../../common/ImageWithFallback";
 import useIsLargeScreen from "../../../hooks/useIsLargeScreen";
 
 function Banner() {
   const [topMovie, setTopMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { openModal } = useContext(InfoModalContext);
   const isLargeScreen = useIsLargeScreen();
 
   // Fetch top rated movie
   useEffect(() => {
     fetchTmdbApi(END_POINTS.movie.top_rated)
-      .then((data) => setTopMovie(data.results?.[0]) || null)
-      .catch((error) =>
-        console.error("Error fetching top rated movie:", error)
-      );
+      .then((data) => {
+        setTopMovie(data.results?.[0] || null);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching top rated movie:", error);
+        setLoading(false);
+      });
   }, []);
 
   // Handle card click to open modal
@@ -32,18 +37,33 @@ function Banner() {
     });
   };
 
-  if (!topMovie) {
-    return <Spinner size="text-3xl" />;
+  if (loading) {
+    return <SkeletonHero />;
   }
-  const imageSrc = `${imgBaseUrl}${isLargeScreen ? topMovie.backdrop_path : topMovie.poster_path}`;
-  
+
+  if (!topMovie) {
+    return (
+      <div className="flex justify-center items-center h-[92vh] bg-neutral-800">
+        <p className="text-gray-400 text-lg">
+          No movie data available. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
+  const imageSrc = `${imgBaseUrl}${
+    isLargeScreen ? topMovie.backdrop_path : topMovie.poster_path
+  }`;
+
   return (
     <div className="relative bg-black  w-full h-[92vh] flex justify-center items-center mb-2 bg-neutral-800">
       <ImageWithFallback
         src={imageSrc}
-        alt={topMovie?.title || "Movie poster"}
-        className="w-full h-full object-cover"
-        isPortrait={!isLargeScreen}
+        alt={topMovie.title}
+        className="w-full h-full"
+        isPortrait={false}
+        loading="eager"
+        fetchpriority="high"
       />
 
       <section className="absolute left-0 p-4 hidden md:block ">

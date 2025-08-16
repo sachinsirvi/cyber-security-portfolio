@@ -39,7 +39,7 @@ const MovieCard = React.memo(function MovieCard({
     <div
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" ? infoModalToggle() : null}
+      onKeyDown={(e) => (e.key === "Enter" ? infoModalToggle() : null)}
       aria-label={`Movie Card for ${title}`}
       className="relative w-full  border-b-1 border-transparent hover:scale-105 hover:border-yellow-300  cursor-pointer transition-all duration-300 flex flex-col bg-neutral-950 rounded-md "
       onClick={infoModalToggle}
@@ -66,12 +66,12 @@ const MovieCard = React.memo(function MovieCard({
           <ImageWithFallback
             src={imgSrc}
             alt={title}
-            className="w-full h-full object-cover rounded-t-md"
             isPortrait={isPortrait}
+            className="w-full h-full object-cover rounded-t-md"
           />
         </div>
         <h3 className="hidden lg:block text-neutral-400 text-center bg-neutral-900 p-2 ">
-          {title }
+          {title}
         </h3>
       </div>
     </div>

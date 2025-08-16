@@ -9,6 +9,7 @@ function InfoModal() {
 
   useEffect(() => {
     if (modalData?.VideoId && modalData?.media_type) {
+      setVideoKey(null); 
       const type = modalData.media_type === "tv" ? "tv" : "movie";
 
       fetchTmdbApi(
