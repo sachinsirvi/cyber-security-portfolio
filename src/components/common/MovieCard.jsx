@@ -4,7 +4,7 @@ import { WatchListContext } from "../../context/WatchListContext";
 import ImageWithFallback from "./ImageWithFallback";
 
 const MovieCard = React.memo(function MovieCard({
-  imgSrc,
+  path,
   title,
   isPortrait,
   data,
@@ -57,6 +57,7 @@ const MovieCard = React.memo(function MovieCard({
         >
           <i
             className={`fa-solid ${isInWatchlist ? "fa-check" : "fa-plus"}`}
+            aria-hidden="true"
           ></i>
         </button>
       </div>
@@ -64,7 +65,7 @@ const MovieCard = React.memo(function MovieCard({
       <div className="flex flex-col h-full justify-between">
         <div className={isPortrait ? "aspect-[2/3]" : "aspect-video"}>
           <ImageWithFallback
-            src={imgSrc}
+           path={path}
             alt={title}
             isPortrait={isPortrait}
             className="w-full h-full object-cover rounded-t-md"
@@ -82,7 +83,7 @@ export default MovieCard;
 import PropTypes from "prop-types";
 
 MovieCard.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
+  path: PropTypes.string,
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,

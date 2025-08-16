@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import SkeletonCard from "../common/SkeletonCard";
 import fetchTmdbApi from "../../api/tmdb";
 import MovieCard from "../common/MovieCard";
-import { imgBaseUrl } from "../../lib/constants";
 import { InfoModalContext } from "../../context/InfoModalContext";
 import useIsLargeScreen from "../../hooks/useIsLargeScreen";
 
@@ -95,15 +94,7 @@ function MoviesRow({ endpoint, title }) {
                 onClick={() => handleCardClick(movie)}
               >
                 <MovieCard
-                  imgSrc={
-                    movie?.backdrop_path || movie?.poster_path
-                      ? `${imgBaseUrl}${
-                          isLargeScreen
-                            ? movie.backdrop_path
-                            : movie.poster_path
-                        }`
-                      : null
-                  }
+                 path={isLargeScreen ? movie.backdrop_path : movie.poster_path}
                   title={movie.title || movie.name}
                   data={movie}
                   isPortrait={!isLargeScreen}
@@ -140,7 +131,7 @@ function MoviesRow({ endpoint, title }) {
 
 export default MoviesRow;
 
-MoviesRow.PropTypes = {
+MoviesRow.propTypes = {
   endpoint: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };

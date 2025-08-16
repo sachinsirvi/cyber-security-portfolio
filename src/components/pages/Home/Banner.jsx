@@ -25,6 +25,17 @@ function Banner() {
       });
   }, []);
 
+  // Preload backdrop image for performance (LCP optimization)
+  useEffect(() => {
+    if (topMovie?.backdrop_path) {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = `${imgBaseUrl}w1280${topMovie.backdrop_path}`;
+      document.head.appendChild(link);
+    }
+  }, [topMovie]);
+
   // Handle card click to open modal
   const handleCardClick = () => {
     if (!topMovie) return;
@@ -51,17 +62,13 @@ function Banner() {
     );
   }
 
-  const imageSrc = `${imgBaseUrl}${
-    isLargeScreen ? topMovie.backdrop_path : topMovie.poster_path
-  }`;
-
   return (
     <div className="relative bg-black  w-full h-[92vh] flex justify-center items-center mb-2 bg-neutral-800">
       <ImageWithFallback
-        src={imageSrc}
+        path={isLargeScreen ? topMovie.backdrop_path : topMovie.poster_path}
         alt={topMovie.title}
         className="w-full h-full"
-        isPortrait={false}
+        isPortrait={!isLargeScreen ? true : false}
         loading="eager"
         fetchpriority="high"
       />

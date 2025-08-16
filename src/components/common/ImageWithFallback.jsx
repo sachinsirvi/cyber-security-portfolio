@@ -1,37 +1,50 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const portraitUrl = "https://placehold.co/300x450?text=No+Image&font=roboto";
-const landscapeUrl = "https://placehold.co/640x360?text=No+Image&font=roboto";
+const TMDB_BASE = "https://image.tmdb.org/t/p/";
+const portraitFallback = "https://placehold.co/300x450?text=No+Image&font=roboto";
+const landscapeFallback = "https://placehold.co/640x360?text=No+Image&font=roboto";
 
 function ImageWithFallback({
-  src,
+  path, //(poster_path or backdrop_path)
   alt,
   className,
   isPortrait,
   loading = "lazy",
-  fetchpriority
+  fetchpriority = "auto"
 }) {
-  const fallbackUrl = isPortrait ? portraitUrl : landscapeUrl;
+  const fallbackUrl = isPortrait ? portraitFallback : landscapeFallback;
 
-// default size instead of original
-  const srcBase = isPortrait ? "w500" : "w780";
-  const imageSrc = src
-    ? src.replace("/original", `/${srcBase}`)
-    : fallbackUrl;
+  if (!path) {
+    return (
+      <img
+        src={fallbackUrl}
+        alt={alt}
+        className={`${className} object-cover`}
+      />
+    );
+  }
 
-  // responsive options
-  const srcSet = src
+  // Pick default sizes
+  const defaultSize = isPortrait ? "w500" : "w780";
+  const imageSrc = `${TMDB_BASE}${defaultSize}${path}`;
+
+  // srcSet for responsive images
+  const srcSet = isPortrait
     ? `
-      ${src.replace("/original", "/w300")} 300w,
-      ${src.replace("/original", "/w500")} 500w,
-      ${src.replace("/original", "/w780")} 780w,
-      ${src.replace("/original", "/w1280")} 1280w
+      ${TMDB_BASE}w200${path} 200w,
+      ${TMDB_BASE}w300${path} 300w,
+      ${TMDB_BASE}w500${path} 500w
     `
-    : null;
+    : `
+      ${TMDB_BASE}w300${path} 300w,
+      ${TMDB_BASE}w780${path} 780w,
+      ${TMDB_BASE}w1280${path} 1280w
+    `;
 
+  // sizes attribute → helps browser pick correct image
   const sizes = isPortrait
-    ? "(max-width: 768px) 140px, 300px"
+    ? "(max-width: 640px) 140px, (max-width: 1024px) 200px, 300px"
     : "(max-width: 768px) 360px, (max-width: 1280px) 780px, 1280px";
 
   return (
@@ -44,15 +57,15 @@ function ImageWithFallback({
       fetchpriority={fetchpriority}
       className={`${className} object-cover`}
       onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = fallbackUrl;
+        e.currentTarget.onerror = null;
+        e.currentTarget.src = fallbackUrl;
       }}
     />
   );
 }
 
 ImageWithFallback.propTypes = {
-  src: PropTypes.string,
+  path: PropTypes.string,  
   alt: PropTypes.string,
   className: PropTypes.string,
   isPortrait: PropTypes.bool,
