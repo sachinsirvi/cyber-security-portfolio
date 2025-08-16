@@ -28,6 +28,7 @@ function Navbar() {
         <Link to="/" className="text-lg font-semibold text-neutral-300 hover:text-yellow-300 transition-colors duration-300">
         Premiere.AI
         </Link>
+    
         {/* Mobile Navigation Links */}
         <button
           type="button"

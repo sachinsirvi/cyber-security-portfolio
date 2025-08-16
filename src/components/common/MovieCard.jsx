@@ -20,8 +20,9 @@ const MovieCard = React.memo(function MovieCard({
   // Handle modal toggle
   const infoModalToggle = () => {
     openModal({
-      Title: data?.title,
+      Title: data?.title || data?.name,
       Description: data?.overview,
+      media_type: data?.media_type,
       VideoId: data?.id,
       vote_average: data?.vote_average,
       popularity: data?.popularity,
@@ -40,7 +41,7 @@ const MovieCard = React.memo(function MovieCard({
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" ? infoModalToggle() : null}
       aria-label={`Movie Card for ${title}`}
-      className="relative w-full h-full border-b-1 border-transparent hover:scale-105 hover:border-yellow-300  cursor-pointer transition-all duration-300 flex flex-col "
+      className="relative w-full  border-b-1 border-transparent hover:scale-105 hover:border-yellow-300  cursor-pointer transition-all duration-300 flex flex-col bg-neutral-950 rounded-md "
       onClick={infoModalToggle}
     >
       {/* Watchlist Button */}
@@ -69,8 +70,8 @@ const MovieCard = React.memo(function MovieCard({
             isPortrait={isPortrait}
           />
         </div>
-        <h3 className="text-neutral-400 text-center bg-neutral-900 p-2 ">
-          {title}
+        <h3 className="hidden lg:block text-neutral-400 text-center bg-neutral-900 p-2 ">
+          {title }
         </h3>
       </div>
     </div>
@@ -91,4 +92,8 @@ MovieCard.propTypes = {
     popularity: PropTypes.number,
   }).isRequired,
   isPortrait: PropTypes.bool,
+};
+
+MovieCard.defaultProps = {
+  isPortrait: false,
 };

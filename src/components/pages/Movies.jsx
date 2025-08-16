@@ -1,17 +1,17 @@
 import { END_POINTS } from "../../lib/constants";
 import MediaRow from "./MediaRow";
 
-import React from 'react'
-
 function Movies() {
+  const movieCategories = [
+    { endpoint: END_POINTS.movie.now_playing, title: "Now Playing Movies" },
+    { endpoint: END_POINTS.movie.top_rated, title: "Top Rated Movies" },
+    { endpoint: END_POINTS.movie.popular, title: "Popular Movies" },
+    { endpoint: END_POINTS.movie.upcoming, title: "Upcoming Movies" }
+  ];
   return (
-    <>
-     <MediaRow endpoint={END_POINTS.movie.now_playing} title={"Now Playing Movies"}/>
-     <MediaRow endpoint={END_POINTS.movie.top_rated} title={"Top Rated Movies"}/>
-     <MediaRow endpoint={END_POINTS.movie.popular} title={"Popular Movies"}/>
-     <MediaRow endpoint={END_POINTS.movie.upcoming} title={"Upcoming Movies"}/>
-    </>
-   
+    <section aria-label="Movies Section">
+     {movieCategories.map((category)=> (<MediaRow key={category.title} endpoint={category.endpoint} title={category.title}/>))}
+    </section>
   )
 }
 

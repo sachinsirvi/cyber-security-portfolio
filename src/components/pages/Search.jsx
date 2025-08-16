@@ -15,11 +15,15 @@ function Search() {
       return;
     }
 
-    const searchUrl = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(trimmed)}`;
+    const searchUrl = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(
+      trimmed
+    )}`;
 
     fetchTmdbApi(searchUrl)
       .then((data) => setSearchResults(data.results || []))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Search error:", err);
+      })
   }, [debouncedQuery]);
 
   return (
@@ -27,7 +31,7 @@ function Search() {
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)} 
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for movies or TV shows..."
         className="bg-black border-b border-gray-600 outline-none p-2 w-full md:w-1/5 text-center mb-4"
       />

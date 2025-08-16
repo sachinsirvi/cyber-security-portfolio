@@ -8,24 +8,30 @@ function InfoModal() {
   const [videoKey, setVideoKey] = useState(null);
 
   useEffect(() => {
-    if (modalData?.VideoId) {
+    if (modalData?.VideoId && modalData?.media_type) {
+      const type = modalData.media_type === "tv" ? "tv" : "movie";
 
       fetchTmdbApi(
-        `https://api.themoviedb.org/3/movie/${modalData?.VideoId}/videos`
+        `https://api.themoviedb.org/3/${type}/${modalData.VideoId}/videos`
       )
         .then((data) => {
           const youtubeVideo = data.results.find(
-            (video) => video.site === "YouTube" && video.type === "Trailer"
+            (video) =>
+              video.site === "YouTube" &&
+              (video.type === "Trailer" || video.type === "Teaser")
           );
           if (youtubeVideo) {
             setVideoKey(youtubeVideo.key);
           } else {
-            setVideoKey(null);
+            setVideoKey("NO_TRAILER_FOUND");
           }
         })
-        .catch((err) => console.error("Error fetching video data:", err));
+        .catch((err) => {
+          console.error("Error fetching video data:", err);
+          setVideoKey("NO_TRAILER_FOUND");
+        });
     }
-  }, [modalData?.VideoId]);
+  }, [modalData?.VideoId, modalData?.media_type]);
 
   if (!isModalOpen) return null;
 
@@ -39,6 +45,7 @@ function InfoModal() {
       {/* Modal */}
       <div className="fixed inset-0  flex flex-col  items-center justify-center z-50 ">
         <button
+          aria-label="Close modal"
           className="font-bold text-red-500 cursor-pointer text-xl hover:text-yellow-300 "
           onClick={closeModal}
         >
@@ -46,8 +53,14 @@ function InfoModal() {
         </button>
         {/* Content */}
         <div className="flex  flex-col  w-full max-w-4xl  bg-neutral-900 rounded-md ">
-          <div className="w-full aspect-video flex items-center justify-center ">
-            {videoKey ? (
+          <div className="w-full aspect-video flex items-center justify-center">
+            {videoKey === null ? (
+              <Spinner />
+            ) : videoKey === "NO_TRAILER_FOUND" ? (
+              <p className="text-gray-400 text-sm text-center px-4">
+                🚫 No official trailer or teaser available for this title.
+              </p>
+            ) : (
               <iframe
                 width="100%"
                 height="100%"
@@ -57,8 +70,6 @@ function InfoModal() {
                 allowFullScreen
                 className="rounded-md border-b border-neutral-600"
               ></iframe>
-            ) : (
-              <Spinner />
             )}
           </div>
 
@@ -73,7 +84,7 @@ function InfoModal() {
 
             {/* Title */}
             <span className="text-lg font-bold ">
-              {modalData.Title || "No Title Available"}
+              {modalData.Title || modalData.name || "N/A"}
             </span>
 
             {/* Popularity */}
