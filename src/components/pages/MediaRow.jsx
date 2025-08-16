@@ -5,6 +5,7 @@ import fetchTmdbApi from "../../api/tmdb";
 import MovieCard from "../common/MovieCard";
 import { InfoModalContext } from "../../context/InfoModalContext";
 import useIsLargeScreen from "../../hooks/useIsLargeScreen";
+import Button from "../common/Button";
 
 function MoviesRow({ endpoint, title }) {
   const [data, setData] = useState([]);
@@ -70,19 +71,23 @@ function MoviesRow({ endpoint, title }) {
   };
 
   return (
-    <div className="p-4 relative">
-      <h1 className="text-neutral-300 text-lg">{title}</h1>
-      <div className="overflow-x-auto">
+    <div className="p-4 relative" aria-label={`Media Row for ${title}`}>
+      <h1 className="text-neutral-300 text-lg" aria-label={`Category: ${title}`}>
+        {title}
+      </h1>
+      <div className="overflow-x-auto" aria-label="Scrollable Movie List">
         <div
           ref={scrollContainerRef}
           className="flex p-2 space-x-4 overflow-x-auto scrollbar-hide"
+          aria-label="Movie Cards Container"
         >
           {loading ? (
-            <div className="flex space-x-4">
+            <div className="flex space-x-4" aria-label="Loading Skeleton Cards">
               {Array.from({ length: 6 }).map((_, i) => (
                 <SkeletonCard
                   key={i}
                   isPortrait={!isLargeScreen ? true : false}
+                  aria-label={`Skeleton Card ${i + 1}`}
                 />
               ))}
             </div>
@@ -92,9 +97,10 @@ function MoviesRow({ endpoint, title }) {
                 key={movie.id}
                 className="min-w-[200px] md:min-w-[250px]"
                 onClick={() => handleCardClick(movie)}
+                aria-label={`Movie Card for ${movie.title || movie.name}`}
               >
                 <MovieCard
-                 path={isLargeScreen ? movie.backdrop_path : movie.poster_path}
+                  path={isLargeScreen ? movie.backdrop_path : movie.poster_path}
                   title={movie.title || movie.name}
                   data={movie}
                   isPortrait={!isLargeScreen}
@@ -103,27 +109,18 @@ function MoviesRow({ endpoint, title }) {
             ))
           )}
         </div>
-        <button
+        <Button
+          label="Scroll movies left"
           onClick={scrollLeft}
-          aria-label="Scroll movies left"
           className="absolute top-1/2 h-3/4 w-12 hover:bg-black/30 transform -translate-y-1/2 left-4 border border-transparent p-2 cursor-pointer"
-        >
-          <i
-            className="text-gray-400 fa-solid fa-arrow-left"
-            aria-hidden="true"
-          ></i>
-        </button>
-
-        <button
+          icon="fa-arrow-left"
+        />
+        <Button
+          label="Scroll movies right"
           onClick={scrollRight}
-          aria-label="Scroll movies right"
           className="absolute top-1/2 h-3/4 w-12 hover:bg-black/30 transform -translate-y-1/2 right-4 border border-transparent p-2 cursor-pointer"
-        >
-          <i
-            className="text-gray-400 fa-solid fa-arrow-right"
-            aria-hidden="true"
-          ></i>
-        </button>
+          icon="fa-arrow-right"
+        />
       </div>
     </div>
   );

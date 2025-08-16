@@ -63,21 +63,30 @@ function Banner() {
   }
 
   return (
-    <div className="relative bg-black  w-full h-[92vh] flex justify-center items-center mb-2 bg-neutral-800">
+    <div
+      className="relative bg-black w-full h-[92vh] flex justify-center items-center mb-2 bg-neutral-800"
+      aria-label="Banner Section"
+    >
       <ImageWithFallback
         path={isLargeScreen ? topMovie.backdrop_path : topMovie.poster_path}
         alt={topMovie.title}
-        className="w-full h-full"
-        isPortrait={!isLargeScreen ? true : false}
+        className="w-full h-full object-cover"
+        isPortrait={!isLargeScreen}
         loading="eager"
         fetchpriority="high"
+        width={1280}
+        height={720}
+        aria-label={`Backdrop image of ${topMovie.title || topMovie.name}`}
       />
 
-      <section className="absolute left-0 p-4 hidden md:block ">
-        <h1 className="text-4xl font-bold text-gray-200 break-words max-w-2xl">
+      <section className="absolute left-0 p-4 hidden md:block" aria-label="Movie Information Section">
+        <h1
+          className="text-4xl font-bold text-gray-200 break-words max-w-2xl"
+          aria-label={`Title: ${topMovie.title || topMovie.name}`}
+        >
           {topMovie.title || topMovie.name}
         </h1>
-        <div className=" w-full space-x-4 mt-4">
+        <div className="w-full space-x-4 mt-4" aria-label="Action Buttons">
           <button
             aria-label="More info about movie"
             className="bg-black/10 backdrop-blur border text-gray-300 rounded-lg p-2 hover:bg-yellow-300 hover:text-black cursor-pointer text-md"
@@ -89,7 +98,7 @@ function Banner() {
             aria-label="Add movie to my list"
             className="bg-black/10 backdrop-blur border text-gray-300 rounded-lg p-2 hover:bg-yellow-300 hover:text-black cursor-pointer text-md"
           >
-            <i className="fa-solid fa-plus"> </i> My List
+            <i className="fa-solid fa-plus" aria-hidden="true"> </i> My List
           </button>
         </div>
       </section>

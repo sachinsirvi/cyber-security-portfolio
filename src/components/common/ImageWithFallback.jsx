@@ -26,7 +26,7 @@ function ImageWithFallback({
   }
 
   // Pick default sizes
-  const defaultSize = isPortrait ? "w500" : "w780";
+  const defaultSize = isPortrait ? "w300" : "w780";
   const imageSrc = `${TMDB_BASE}${defaultSize}${path}`;
 
   // srcSet for responsive images

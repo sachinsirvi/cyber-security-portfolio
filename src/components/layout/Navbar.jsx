@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import Button from "../common/Button";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   // nav links array
   const navlinks = [
-    {name: "Search", path: "/search"},
+    { name: "Search", path: "/search" },
     { name: "Home", path: "/", end: true },
     { name: "Movies", path: "/movies" },
     { name: "TV Shows", path: "/tvshows" },
     { name: "Watchlist", path: "/watchlist" },
   ];
+
   // navlink classname(helper function)
   const navlinkClassname = ({ isActive }) => {
     return isActive ? "text-yellow-300" : "text-neutral-400";
@@ -21,29 +24,31 @@ function Navbar() {
   };
 
   return (
-    <header className="relative bg-black/50 backdrop-blur w-full sticky top-0 z-50">
+    <header
+      className="relative bg-black/50 backdrop-blur w-full sticky top-0 z-50"
+      aria-label="Main Navigation"
+    >
       {/* Navbar */}
-      <nav className="text-white  p-4 flex justify-between items-center">
+      <nav className="text-white p-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-lg font-semibold text-neutral-300 hover:text-yellow-300 transition-colors duration-300">
-        Premiere.AI
-        </Link>
-    
-        {/* Mobile Navigation Links */}
-        <button
-          type="button"
-          className="md:hidden cursor-pointer"
-          onClick={toggleMenu}
+        <Link
+          to="/"
+          className="text-lg font-semibold text-neutral-300 hover:text-yellow-300 transition-colors duration-300"
+          aria-label="Go to Premiere.AI Home"
         >
-          {menuOpen ? (
-            <i className="fa-solid fa-xmark"> </i>
-          ) : (
-            <i className="fa-solid fa-bars"></i>
-          )}
-        </button>
+          Premiere.AI
+        </Link>
+
+        {/* Mobile Navigation Toggle Button */}
+        <Button
+          label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={toggleMenu}
+          className="md:hidden cursor-pointer"
+          icon={menuOpen ? "fa-xmark" : "fa-bars"}
+        />
 
         {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex space-x-4">
+        <ul className="hidden md:flex space-x-4" aria-label="Desktop Navigation Links">
           {navlinks.map((item) => {
             return (
               <li key={item.path}>
@@ -51,6 +56,7 @@ function Navbar() {
                   to={item.path}
                   end={item.end}
                   className={navlinkClassname}
+                  aria-label={`Navigate to ${item.name}`}
                 >
                   {item.name}
                 </NavLink>
@@ -62,7 +68,10 @@ function Navbar() {
 
       {/* Mobile Navigation Links */}
       {menuOpen && (
-        <div className="md:hidden absolute flex flex-col items-center bg-black/90 backdrop-blur text-white p-4 top-full  top-0 right-0  border-t border-yellow-300 w-1/2 ">
+        <div
+          className="md:hidden absolute flex flex-col items-center bg-black/90 backdrop-blur text-white p-4 top-full border-t border-yellow-300 w-1/2"
+          aria-label="Mobile Navigation Links"
+        >
           <ul className="space-y-2">
             {navlinks.map((item) => {
               return (
@@ -72,6 +81,7 @@ function Navbar() {
                     end={item.end}
                     className={navlinkClassname}
                     onClick={toggleMenu}
+                    aria-label={`Navigate to ${item.name}`}
                   >
                     {item.name}
                   </NavLink>

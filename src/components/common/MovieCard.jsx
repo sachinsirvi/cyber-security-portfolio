@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from "react";
 import { InfoModalContext } from "../../context/InfoModalContext";
 import { WatchListContext } from "../../context/WatchListContext";
 import ImageWithFallback from "./ImageWithFallback";
+import Button from "./Button";
 
 const MovieCard = React.memo(function MovieCard({
   path,
@@ -46,20 +47,14 @@ const MovieCard = React.memo(function MovieCard({
     >
       {/* Watchlist Button */}
       <div>
-        <button
-          aria-label={
-            isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"
-          }
+        <Button
+          label={isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+          onClick={handleWatchlistToggle}
           className={`absolute top-0 right-0 bg-black/20 border border-transparent text-gray-300 p-2 hover:bg-yellow-300 hover:text-black transition-colors duration-300 cursor-pointer ${
             isInWatchlist ? "text-yellow-300" : "text-gray-300"
           }`}
-          onClick={handleWatchlistToggle}
-        >
-          <i
-            className={`fa-solid ${isInWatchlist ? "fa-check" : "fa-plus"}`}
-            aria-hidden="true"
-          ></i>
-        </button>
+          icon={isInWatchlist ? "fa-check" : "fa-plus"}
+        />
       </div>
 
       <div className="flex flex-col h-full justify-between">
