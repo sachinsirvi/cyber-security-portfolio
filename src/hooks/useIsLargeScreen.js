@@ -5,7 +5,7 @@ function useIsLargeScreen() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024);
+      setIsLargeScreen(window.innerWidth >= 768);
     };
 
     window.addEventListener("resize", handleResize);

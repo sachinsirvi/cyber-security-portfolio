@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import fetchTmdbApi from "../../api/tmdb";
 import MovieCard from "../common/MovieCard";
 import useDebouncedValue from "../../hooks/useDebounce";
+import useIsLargeScreen from "../../hooks/useIsLargeScreen";
 
 function Search() {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const debouncedQuery = useDebouncedValue(query, 400);
+  const isLargeScreen = useIsLargeScreen();
 
   useEffect(() => {
     const trimmed = debouncedQuery.trim();
@@ -40,14 +42,17 @@ function Search() {
         <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4 mt-4">
           {searchResults.map((item) => {
             if (["movie", "tv"].includes(item.media_type)) {
-              const imgPath = item.poster_path || item.backdrop_path;
+             
               return (
+
                 <MovieCard
-                  key={item.id}
-                  imgSrc={`https://image.tmdb.org/t/p/w500${imgPath}`}
-                  title={item.title || item.name}
-                  data={item}
-                />
+                                  path={isLargeScreen ? item.backdrop_path : item.poster_path}
+                                  title={item.title || item.name}
+                                  data={item}
+                                  isPortrait={!isLargeScreen}
+                                />
+
+                
               );
             }
             return null;

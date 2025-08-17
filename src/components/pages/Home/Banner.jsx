@@ -5,11 +5,13 @@ import { InfoModalContext } from "../../../context/InfoModalContext";
 import SkeletonHero from "../../common/SkeletonBanner";
 import ImageWithFallback from "../../common/ImageWithFallback";
 import useIsLargeScreen from "../../../hooks/useIsLargeScreen";
+import { WatchListContext } from "../../../context/WatchListContext";
 
 function Banner() {
   const [topMovie, setTopMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const { openModal } = useContext(InfoModalContext);
+  const { toggleWatchlist, watchList } = useContext(WatchListContext);
   const isLargeScreen = useIsLargeScreen();
 
   // Fetch top rated movie
@@ -35,6 +37,12 @@ function Banner() {
       document.head.appendChild(link);
     }
   }, [topMovie]);
+
+  // Handle watchlist toggle
+  const handleWatchlistToggle = (e) => {
+    e.stopPropagation();
+    toggleWatchlist(topMovie);
+  };
 
   // Handle card click to open modal
   const handleCardClick = () => {
@@ -64,24 +72,31 @@ function Banner() {
 
   return (
     <div
-      className="relative bg-black w-full h-[92vh] flex justify-center items-center mb-2 bg-neutral-800"
+      className={`relative ${
+        isLargeScreen
+          ? "w-full h-full border-transparent"
+          : "w-[90vw] border-neutral-400 mt-2"
+      } mx-auto rounded-md border flex justify-center items-center mb-2 bg-neutral-900`}
       aria-label="Banner Section"
     >
       <ImageWithFallback
         path={isLargeScreen ? topMovie.backdrop_path : topMovie.poster_path}
         alt={topMovie.title}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover rounded-md"
         isPortrait={!isLargeScreen}
         loading="eager"
         fetchpriority="high"
-        width={1280}
-        height={720}
         aria-label={`Backdrop image of ${topMovie.title || topMovie.name}`}
       />
 
-      <section className="absolute left-0 p-4 hidden md:block" aria-label="Movie Information Section">
+      <section
+        className={`absolute ${
+          isLargeScreen ? "left-0 p-4" : "bottom-0 p-2"
+        }`}
+        aria-label="Movie Information Section"
+      >
         <h1
-          className="text-4xl font-bold text-gray-200 break-words max-w-2xl"
+          className="text-4xl hidden md:block font-bold text-gray-200 break-words max-w-2xl"
           aria-label={`Title: ${topMovie.title || topMovie.name}`}
         >
           {topMovie.title || topMovie.name}
@@ -96,9 +111,18 @@ function Banner() {
           </button>
           <button
             aria-label="Add movie to my list"
+            onClick={handleWatchlistToggle}
             className="bg-black/10 backdrop-blur border text-gray-300 rounded-lg p-2 hover:bg-yellow-300 hover:text-black cursor-pointer text-md"
           >
-            <i className="fa-solid fa-plus" aria-hidden="true"> </i> My List
+            <i
+              className={`fa-solid ${
+                watchList?.some((item) => item.id === topMovie.id)
+                  ? "fa-check"
+                  : "fa-plus"
+              }`}
+              aria-hidden="true"
+            ></i>{" "}
+            My List
           </button>
         </div>
       </section>

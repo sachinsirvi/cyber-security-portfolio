@@ -33,7 +33,7 @@ function Navbar() {
         {/* Logo */}
         <Link
           to="/"
-          className="text-lg font-semibold text-neutral-300 hover:text-yellow-300 transition-colors duration-300"
+          className="text-md font-semibold text-neutral-300 hover:text-yellow-300 transition-colors duration-300"
           aria-label="Go to Premiere.AI Home"
         >
           Premiere.AI
@@ -41,9 +41,10 @@ function Navbar() {
 
         {/* Mobile Navigation Toggle Button */}
         <Button
-          label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label="Toggle mobile navigation menu"
+          type="button"
           onClick={toggleMenu}
-          className="md:hidden cursor-pointer"
+          className="md:hidden cursor-pointer text-xl"
           icon={menuOpen ? "fa-xmark" : "fa-bars"}
         />
 
@@ -69,7 +70,7 @@ function Navbar() {
       {/* Mobile Navigation Links */}
       {menuOpen && (
         <div
-          className="md:hidden absolute flex flex-col items-center bg-black/90 backdrop-blur text-white p-4 top-full border-t border-yellow-300 w-1/2"
+          className="md:hidden absolute flex flex-col items-center w-screen bg-black/90 backdrop-blur text-white p-4 top-full right-0 border-t border-yellow-300 w-1/2"
           aria-label="Mobile Navigation Links"
         >
           <ul className="space-y-2">

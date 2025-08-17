@@ -72,7 +72,7 @@ function MoviesRow({ endpoint, title }) {
 
   return (
     <div className="p-4 relative" aria-label={`Media Row for ${title}`}>
-      <h1 className="text-neutral-300 text-lg" aria-label={`Category: ${title}`}>
+      <h1 className="text-neutral-300 text-md" aria-label={`Category: ${title}`}>
         {title}
       </h1>
       <div className="overflow-x-auto" aria-label="Scrollable Movie List">
@@ -95,7 +95,7 @@ function MoviesRow({ endpoint, title }) {
             data.map((movie) => (
               <div
                 key={movie.id}
-                className="min-w-[200px] md:min-w-[250px]"
+                className="min-w-[100px] sm:min-w-[150px] md:min-w-[250px]"
                 onClick={() => handleCardClick(movie)}
                 aria-label={`Movie Card for ${movie.title || movie.name}`}
               >
@@ -110,13 +110,11 @@ function MoviesRow({ endpoint, title }) {
           )}
         </div>
         <Button
-          label="Scroll movies left"
           onClick={scrollLeft}
           className="absolute top-1/2 h-3/4 w-12 hover:bg-black/30 transform -translate-y-1/2 left-4 border border-transparent p-2 cursor-pointer"
           icon="fa-arrow-left"
         />
         <Button
-          label="Scroll movies right"
           onClick={scrollRight}
           className="absolute top-1/2 h-3/4 w-12 hover:bg-black/30 transform -translate-y-1/2 right-4 border border-transparent p-2 cursor-pointer"
           icon="fa-arrow-right"

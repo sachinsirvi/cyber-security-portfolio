@@ -42,34 +42,27 @@ const MovieCard = React.memo(function MovieCard({
       tabIndex={0}
       onKeyDown={(e) => (e.key === "Enter" ? infoModalToggle() : null)}
       aria-label={`Movie Card for ${title}`}
-      className="relative w-full  border-b-1 border-transparent hover:scale-105 hover:border-yellow-300  cursor-pointer transition-all duration-300 flex flex-col bg-neutral-950 rounded-md "
+      className="relative w-full border-b-1 border-transparent hover:scale-105 hover:border-yellow-300 cursor-pointer transition-all duration-300 flex flex-col bg-neutral-950 rounded-md"
       onClick={infoModalToggle}
     >
-      {/* Watchlist Button */}
-      <div>
-        <Button
-          label={isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
-          onClick={handleWatchlistToggle}
-          className={`absolute top-0 right-0 bg-black/20 border border-transparent text-gray-300 p-2 hover:bg-yellow-300 hover:text-black transition-colors duration-300 cursor-pointer ${
-            isInWatchlist ? "text-yellow-300" : "text-gray-300"
-          }`}
-          icon={isInWatchlist ? "fa-check" : "fa-plus"}
-        />
-      </div>
-
-      <div className="flex flex-col h-full justify-between">
-        <div className={isPortrait ? "aspect-[2/3]" : "aspect-video"}>
-          <ImageWithFallback
-           path={path}
-            alt={title}
-            isPortrait={isPortrait}
-            className="w-full h-full object-cover rounded-t-md"
-          />
-        </div>
-        <h3 className="hidden lg:block text-neutral-400 text-center bg-neutral-900 p-2 ">
-          {title}
-        </h3>
-      </div>
+      <Button
+        aria-label={`Toggle watchlist for ${title}`}
+        type="button"
+        onClick={handleWatchlistToggle}
+        className={`absolute top-0 right-1 bg-black/20 border border-transparent text-gray-300 p-1 sm:p-2 md:p-3 hover:bg-yellow-300 hover:text-black transition-colors duration-300 cursor-pointer ${
+          isInWatchlist ? "text-yellow-300" : "text-gray-300"
+        }`}
+        icon={isInWatchlist ? "fa-check" : "fa-plus"}
+      />
+      <ImageWithFallback
+        path={path}
+        alt={title}
+        isPortrait={isPortrait}
+        className="w-full h-full object-cover rounded-t-md"
+      />
+      <h3 className="hidden lg:block text-neutral-400 text-center bg-neutral-900 p-2">
+        {title}
+      </h3>
     </div>
   );
 });

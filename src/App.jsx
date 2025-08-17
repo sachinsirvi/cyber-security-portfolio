@@ -1,23 +1,25 @@
 import React, { Suspense, lazy, useContext } from "react";
 import "./App.css";
 import Navbar from "./components/layout/Navbar.jsx";
-import Footer from "./components/layout/Footer.jsx";
 import { Routes, Route } from "react-router-dom";
 import LoadingFallback from "./components/common/LoadingFallback.jsx";
 import AiChatToggle from "./components/common/AiChatToggle.jsx";
 import { InfoModalContext } from "./context/InfoModalContext.jsx";
-import InfoModal from "./components/common/InfoModal.jsx";
+
+// Lazy-load components to reduce initial bundle size
+const Footer = lazy(() => import("./components/layout/Footer.jsx"));
+const InfoModal = lazy(() => import("./components/common/InfoModal.jsx"));
+
 // Lazy-load route pages to reduce initial bundle
 const Movies = lazy(() => import("./components/pages/Movies.jsx"));
 const TvShows = lazy(() => import("./components/pages/TvShows.jsx"));
 const MyWatchList = lazy(() => import("./components/pages/MyWatchList.jsx"));
 const Search = lazy(() => import("./components/pages/Search.jsx"));
 const Home = lazy(() => import("./components/pages/Home/Home.jsx"));
-
 const LazyAIChatModal = lazy(() => import("./components/pages/AIChatModal.jsx"));
 
 export default function App() {
-  const {isModalOpen} = useContext(InfoModalContext);
+  const { isModalOpen } = useContext(InfoModalContext);
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -65,7 +67,6 @@ export default function App() {
               </Suspense>
             }
           />
-
           <Route
             path="*"
             element={
@@ -79,7 +80,6 @@ export default function App() {
               </div>
             }
           />
-
           <Route
             path="/ai_chat"
             element={
@@ -90,9 +90,10 @@ export default function App() {
           />
         </Routes>
       </div>
-      <Footer />
+      <Suspense fallback={<LoadingFallback text="Loading Footer…" />}>
+        <Footer />
+      </Suspense>
       <AiChatToggle />
-      
       {isModalOpen && (
         <Suspense fallback={null}>
           <InfoModal />

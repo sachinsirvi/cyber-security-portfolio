@@ -84,7 +84,7 @@ function InfoModal() {
             </span>
 
             {/* Title */}
-            <span className="text-lg font-bold ">
+            <span className="text-md font-bold ">
               {modalData.Title || modalData.name || "N/A"}
             </span>
 
@@ -96,7 +96,7 @@ function InfoModal() {
                 : "N/A"}{" "}
             </span>
           </div>
-          <div className=" w-full text-center text-gray-300 rounded-lg p-4 ">
+          <div className=" w-full text-center text-gray-300 rounded-lg p-4 text-sm ">
             {modalData.Description}
           </div>
         </div>

@@ -10,7 +10,6 @@ function ImageWithFallback({
   alt,
   className,
   isPortrait,
-  loading = "lazy",
   fetchpriority = "auto"
 }) {
   const fallbackUrl = isPortrait ? portraitFallback : landscapeFallback;
@@ -53,7 +52,7 @@ function ImageWithFallback({
       srcSet={srcSet}
       sizes={sizes}
       alt={alt}
-      loading={loading}
+      loading="lazy" /* Lazy-load images */
       fetchpriority={fetchpriority}
       className={`${className} object-cover`}
       onError={(e) => {
