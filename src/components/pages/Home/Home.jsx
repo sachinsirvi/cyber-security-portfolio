@@ -25,7 +25,7 @@ function Home() {
         <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w780/sample.jpg" />
       </Helmet>
 
-      <main className="max-w-[1500px] mx-auto">
+      <main className="w-full mx-auto">
         <section aria-label="Banner Section">
           <LazyWrapper spinnerSize="text-4xl">
             <Banner />

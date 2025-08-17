@@ -68,11 +68,15 @@ function Banner() {
 
   return (
     <div
-      className={`relative ${
-        isLargeScreen ? "w-full h-[92vh]" : "w-[90vw] mt-2"
-      } mx-auto rounded-md flex flex-col mb-2 bg-neutral-900 border border-neutral-600 overflow-hidden`}
-      aria-label="Banner Section"
-    >
+    className={`
+      relative
+      w-[90vw] mx-auto mt-2 rounded-md border border-neutral-600
+      h-[70vh] md:h-[80vh] 
+      lg:w-screen lg:h-[92vh] lg:mx-0 lg:rounded-none lg:border-0
+      flex flex-col mb-2 overflow-hidden
+    `}
+    aria-label="Banner Section"
+  >
       {/* Preload hero for LCP */}
       <Helmet>
         <link rel="preload" as="image" href={bannerImage} />

@@ -15,7 +15,7 @@ function Navbar() {
   ];
 
   const navlinkClassname = ({ isActive }) =>
-    isActive ? "text-yellow-300" : "text-neutral-400";
+    isActive ? "text-yellow-300" : "text-neutral-300";
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 

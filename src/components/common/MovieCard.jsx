@@ -80,7 +80,7 @@ const MovieCard = React.memo(function MovieCard({
       />
 
       {/* Title (not a heading, just text) */}
-      <p className="hidden lg:block text-neutral-400 text-center bg-neutral-900 p-2 line-clamp-1">
+      <p className="hidden lg:block text-neutral-300 text-center bg-neutral-900 p-2 ">
         {title}
       </p>
     </div>
