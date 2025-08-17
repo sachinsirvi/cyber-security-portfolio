@@ -20,12 +20,16 @@ function Search() {
 
     const searchUrl = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(
       trimmed
-    )}`;
+    )}&language=en-US&page=1`;
 
     fetchTmdbApi(searchUrl)
-      .then((data) => setSearchResults(data.results || []))
+      .then((data) => {
+        // defensive check to avoid crashing
+        setSearchResults(data?.results || []);
+      })
       .catch((err) => {
         console.error("Search error:", err);
+        setSearchResults([]); // fallback
       });
   }, [debouncedQuery]);
 
@@ -53,7 +57,8 @@ function Search() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for movies or TV shows..."
-        className="bg-black border-b border-gray-600 outline-none p-2 w-full md:w-1/5 text-center mb-4"
+        className="bg-black border-b border-gray-600 outline-none p-2 w-full md:w-1/3 text-center mb-4"
+        aria-label="Search movies and TV shows"
       />
 
       {searchResults.length > 0 ? (

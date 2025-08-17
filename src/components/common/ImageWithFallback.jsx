@@ -11,11 +11,11 @@ const landscapeFallback =
 
 function ImageWithFallback({
   path,
-  alt,
-  className,
-  isPortrait,
-  loading,
-  fetchpriority,
+  alt = "Movie poster",        
+  className = "",              
+  isPortrait = false,           
+  loading = "lazy",            
+  fetchpriority = "auto",      
 }) {
   const fallbackUrl = isPortrait ? portraitFallback : landscapeFallback;
 
@@ -66,13 +66,13 @@ function ImageWithFallback({
       src={imageSrc}
       srcSet={srcSet}
       sizes={sizes}
-      alt={alt || "Movie poster"}
+      alt={alt}
       className={`${className} object-cover`}
       loading={loading}
       decoding="async"
       fetchpriority={fetchpriority}
       width={width}
-      height={height} // fixes CLS
+      height={height} 
       onError={(e) => {
         e.currentTarget.onerror = null;
         e.currentTarget.src = fallbackUrl;
@@ -88,14 +88,6 @@ ImageWithFallback.propTypes = {
   isPortrait: PropTypes.bool,
   loading: PropTypes.oneOf(["lazy", "eager"]),
   fetchpriority: PropTypes.oneOf(["high", "low", "auto"]),
-};
-
-ImageWithFallback.defaultProps = {
-  alt: "Poster not available",
-  className: "",
-  isPortrait: false,
-  loading: "lazy",
-  fetchpriority: "auto",
 };
 
 export default ImageWithFallback;

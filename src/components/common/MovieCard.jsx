@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import { InfoModalContext } from "../../context/InfoModalContext";
 import { WatchListContext } from "../../context/WatchListContext";
 import ImageWithFallback from "./ImageWithFallback";
-import Button from "./Button";
 
 const MovieCard = React.memo(function MovieCard({
   path,
   title,
-  isPortrait,
+  isPortrait = false,
   data,
 }) {
   const { openModal } = useContext(InfoModalContext);
@@ -49,7 +48,6 @@ const MovieCard = React.memo(function MovieCard({
 
   return (
     <div
-      role="button"
       tabIndex={0}
       onKeyDown={handleKeyDown}
       aria-label={`Open info for ${title}`}
@@ -57,7 +55,7 @@ const MovieCard = React.memo(function MovieCard({
       onClick={infoModalToggle}
     >
       {/* Watchlist button */}
-      <Button
+      <button
         aria-label={
           isInWatchlist
             ? `Remove ${title} from watchlist`
@@ -99,10 +97,6 @@ MovieCard.propTypes = {
     popularity: PropTypes.number,
   }).isRequired,
   isPortrait: PropTypes.bool,
-};
-
-MovieCard.defaultProps = {
-  isPortrait: false,
 };
 
 export default MovieCard;

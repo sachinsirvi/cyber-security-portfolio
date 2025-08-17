@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import Button from "../common/Button";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,12 +19,10 @@ function Navbar() {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <header
-      className="relative bg-black/50 backdrop-blur-sm w-full sticky top-0 z-50"
-    >
-      <nav 
+    <header className="relative bg-black/50 backdrop-blur-sm w-full sticky top-0 z-50">
+      <nav
         className="text-white p-4 flex justify-between items-center"
-        role="navigation" 
+        role="navigation"
         aria-label="Main Navigation"
       >
         {/* Logo */}
@@ -42,18 +39,22 @@ function Navbar() {
         </Link>
 
         {/* Mobile Navigation Toggle Button */}
-        <Button
+        <button
           aria-label="Toggle mobile navigation menu"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           type="button"
           onClick={toggleMenu}
-          className="md:hidden cursor-pointer text-xl"
-          icon={menuOpen ? "fa-xmark" : "fa-bars"}
-        />
+          className="md:hidden cursor-pointer text-2xl"
+        >
+          <i className={`fa-solid ${menuOpen ? "fa-xmark" : "fa-bars"}`} />
+        </button>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-4" aria-label="Desktop Navigation Links">
+        <ul
+          className="hidden md:flex space-x-4"
+          aria-label="Desktop Navigation Links"
+        >
           {navlinks.map((item) => (
             <li key={item.path}>
               <NavLink
@@ -72,12 +73,12 @@ function Navbar() {
       {/* Mobile Navigation */}
       <div
         id="mobile-menu"
-        className={`md:hidden absolute top-full right-0 bg-black/95 text-white border-t border-yellow-300 transform transition-transform duration-300 ease-in-out ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } w-2/3 h-screen`}
+        className={`md:hidden absolute top-full w-full p-6 transition duration-300 ease-in-out bg-black/90 text-white border-t border-yellow-300 transform transition-transform duration-300 ease-in-out  ${
+          menuOpen ? "block" : "hidden"
+        }`}
         aria-label="Mobile Navigation Links"
       >
-        <ul className="flex flex-col items-center space-y-4 mt-6">
+        <ul className="flex flex-col items-center space-y-8 ">
           {navlinks.map((item) => (
             <li key={item.path}>
               <NavLink

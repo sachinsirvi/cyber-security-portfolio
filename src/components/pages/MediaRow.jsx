@@ -94,7 +94,7 @@ function MediaRow({ endpoint, title }) {
             ))
           ) : (
             data.map((movie) => (
-              <button
+              <div
                 key={movie.id}
                 onClick={() => handleCardClick(movie)}
                 className="min-w-[100px] sm:min-w-[150px] md:min-w-[250px] rounded overflow-hidden focus:outline-none focus:ring-2 focus:ring-yellow-400"
@@ -107,7 +107,7 @@ function MediaRow({ endpoint, title }) {
                   isPortrait={!isLargeScreen}
                   lazy
                 />
-              </button>
+              </div>
             ))
           )}
         </div>
