@@ -1,7 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Button({ label, onClick, className, icon, ariaLabel }) {
+function Button({
+  label,
+  onClick = () => {},   
+  className = "",
+  icon = null,
+  ariaLabel = null,
+}) {
   return (
     <button
       onClick={onClick}
@@ -20,13 +26,6 @@ Button.propTypes = {
   className: PropTypes.string,
   icon: PropTypes.string,
   ariaLabel: PropTypes.string,
-};
-
-Button.defaultProps = {
-  onClick: () => {},
-  className: "",
-  icon: null,
-  ariaLabel: null,
 };
 
 export default Button;

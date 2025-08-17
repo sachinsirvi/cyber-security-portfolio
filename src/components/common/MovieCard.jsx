@@ -25,12 +25,13 @@ const MovieCard = React.memo(function MovieCard({
     openModal({
       Title: data?.title || data?.name,
       Description: data?.overview,
-      media_type: data?.media_type,
+      media_type: data?.media_type || "movie",  
       VideoId: data?.id,
       vote_average: data?.vote_average,
       popularity: data?.popularity,
     });
   };
+  
 
   // Handle watchlist toggle
   const handleWatchlistToggle = (e) => {
