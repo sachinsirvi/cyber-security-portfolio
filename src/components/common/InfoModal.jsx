@@ -52,10 +52,10 @@ function InfoModal() {
           <button
             aria-label="Close modal"
             onClick={closeModal}
-            className="absolute top-2 right-2 text-gray-300 hover:text-yellow-300 
-                       focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="absolute top-0 right-4 p-2 text-gray-300  
+                       text-red-400 "
           >
-            <span aria-hidden="true" className="text-2xl font-bold">&times;</span>
+            <span aria-hidden="true" className="text-3xl font-bold">&times;</span>
           </button>
 
           {/* Trailer / Teaser */}
