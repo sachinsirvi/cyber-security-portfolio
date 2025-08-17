@@ -1,4 +1,8 @@
+import useIsLargeScreen from "../../hooks/useIsLargeScreen";
+
 function SkeletonHero() {
+  const isLargeScreen = useIsLargeScreen();
+
   return (
     <div className="relative w-full h-[92vh] bg-neutral-800 animate-pulse rounded-md">
       {/* Image Placeholder */}
@@ -6,11 +10,11 @@ function SkeletonHero() {
 
       {/* Movie Information Section */}
       <div
-        className={`absolute ${
-          window.innerWidth >= 1024
-            ? "left-0 p-4 md:block"
-            : "bottom-0 p-2 w-[90%] mx-auto"
-        } space-y-4`}
+        className={`absolute space-y-4 ${
+          isLargeScreen
+            ? "left-0 top-1/2 -translate-y-1/2 p-6"
+            : "bottom-0 p-4 w-[90%] mx-auto"
+        }`}
       >
         {/* Title Placeholder */}
         <div className="w-72 h-10 bg-neutral-700 rounded"></div>

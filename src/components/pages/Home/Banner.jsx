@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
-import { imgBaseUrl, END_POINTS } from "../../../lib/constants";
+import { Helmet } from "react-helmet-async";
+import { END_POINTS } from "../../../lib/constants";
 import fetchTmdbApi from "../../../api/tmdb";
 import { InfoModalContext } from "../../../context/InfoModalContext";
 import SkeletonHero from "../../common/SkeletonBanner";
-import ImageWithFallback from "../../common/ImageWithFallback";
 import useIsLargeScreen from "../../../hooks/useIsLargeScreen";
 import { WatchListContext } from "../../../context/WatchListContext";
+import ImageWithFallback from "../../common/ImageWithFallback";
 
 function Banner() {
   const [topMovie, setTopMovie] = useState(null);
@@ -27,38 +28,24 @@ function Banner() {
       });
   }, []);
 
-  // Preload backdrop image for performance (LCP optimization)
-  useEffect(() => {
-    if (topMovie?.backdrop_path) {
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "image";
-      link.href = `${imgBaseUrl}w1280${topMovie.backdrop_path}`;
-      document.head.appendChild(link);
-    }
-  }, [topMovie]);
-
-  // Handle watchlist toggle
   const handleWatchlistToggle = (e) => {
     e.stopPropagation();
     toggleWatchlist(topMovie);
   };
 
-  // Handle card click to open modal
   const handleCardClick = () => {
     if (!topMovie) return;
     openModal({
       Title: topMovie.title,
       Description: topMovie.overview,
       VideoId: topMovie.id,
+      media_type: "movie",
       vote_average: topMovie.vote_average,
       popularity: topMovie.popularity,
     });
   };
 
-  if (loading) {
-    return <SkeletonHero />;
-  }
+  if (loading) return <SkeletonHero />;
 
   if (!topMovie) {
     return (
@@ -70,62 +57,100 @@ function Banner() {
     );
   }
 
+  // pick correct image
+  const bannerPath = isLargeScreen
+    ? topMovie.backdrop_path
+    : topMovie.poster_path;
+
+  const bannerImage = bannerPath
+    ? `https://image.tmdb.org/t/p/${isLargeScreen ? "w1280" : "w500"}${bannerPath}`
+    : "https://via.placeholder.com/1280x720?text=No+Image";
+
   return (
     <div
       className={`relative ${
-        isLargeScreen
-          ? "w-full h-full border-transparent"
-          : "w-[90vw] border-neutral-400 mt-2"
-      } mx-auto rounded-md border flex justify-center items-center mb-2 bg-neutral-900`}
+        isLargeScreen ? "w-full h-[92vh]" : "w-[90vw] mt-2"
+      } mx-auto rounded-md flex flex-col mb-2 bg-neutral-900 border border-neutral-600 overflow-hidden`}
       aria-label="Banner Section"
     >
+      {/* Preload hero for LCP */}
+      <Helmet>
+        <link rel="preload" as="image" href={bannerImage} />
+      </Helmet>
+
+      {/* Poster / Backdrop */}
       <ImageWithFallback
-        path={isLargeScreen ? topMovie.backdrop_path : topMovie.poster_path}
-        alt={topMovie.title}
-        className="w-full h-full object-cover rounded-md"
+        path={bannerPath}
+        alt={topMovie.title || topMovie.name}
         isPortrait={!isLargeScreen}
-        loading="eager"
-        fetchpriority="high"
-        aria-label={`Backdrop image of ${topMovie.title || topMovie.name}`}
+        className="w-full h-full object-cover rounded-md aspect-video" 
+        width={isLargeScreen ? "1280" : "500"}
+        height={isLargeScreen ? "720" : "750"}
+        fetchpriority="high" 
+        decoding="async"
       />
 
-      <section
-        className={`absolute ${
-          isLargeScreen ? "left-0 p-4" : "bottom-0 p-2"
-        }`}
-        aria-label="Movie Information Section"
-      >
-        <h1
-          className="text-4xl hidden md:block font-bold text-gray-200 break-words max-w-2xl"
-          aria-label={`Title: ${topMovie.title || topMovie.name}`}
+      {/* Desktop Overlay */}
+      {isLargeScreen && (
+        <section
+          className="absolute left-0 top-1/2 -translate-y-1/2 p-6"
+          aria-labelledby="banner-title"
         >
-          {topMovie.title || topMovie.name}
-        </h1>
-        <div className="w-full space-x-4 mt-4" aria-label="Action Buttons">
+          <h2
+            id="banner-title"
+            className="text-3xl font-bold text-gray-200 max-w-2xl break-words"
+          >
+            {topMovie.title || topMovie.name}
+          </h2>
+
+          <div
+            className="flex gap-4 mt-4"
+            role="group"
+            aria-label="Movie Actions"
+          >
+            <button
+              onClick={handleCardClick}
+              className="bg-black/60 text-white rounded-lg px-4 py-2 hover:bg-yellow-300 hover:text-black transition"
+            >
+              More Info
+            </button>
+            <button
+              onClick={handleWatchlistToggle}
+              aria-pressed={watchList?.some((item) => item.id === topMovie.id)}
+              className="bg-black/60 text-white rounded-lg px-4 py-2 hover:bg-yellow-300 hover:text-black transition"
+            >
+              {watchList?.some((item) => item.id === topMovie.id)
+                ? "✓ Added"
+                : "+ My List"}
+            </button>
+          </div>
+        </section>
+      )}
+
+      {/* Mobile Buttons (below poster) */}
+      {!isLargeScreen && (
+        <div
+          className="flex gap-3 w-full bg-black rounded-md p-4"
+          role="group"
+          aria-label="Movie Actions"
+        >
           <button
-            aria-label="More info about movie"
-            className="bg-black/10 backdrop-blur border text-gray-300 rounded-lg p-2 hover:bg-yellow-300 hover:text-black cursor-pointer text-md"
             onClick={handleCardClick}
+            className="flex-1 bg-neutral-800 rounded-lg px-4 py-3 text-md text-white transition"
           >
             More Info
           </button>
           <button
-            aria-label="Add movie to my list"
             onClick={handleWatchlistToggle}
-            className="bg-black/10 backdrop-blur border text-gray-300 rounded-lg p-2 hover:bg-yellow-300 hover:text-black cursor-pointer text-md"
+            aria-pressed={watchList?.some((item) => item.id === topMovie.id)}
+            className="flex-1 bg-neutral-800 rounded-lg px-4 py-3 text-md text-white transition"
           >
-            <i
-              className={`fa-solid ${
-                watchList?.some((item) => item.id === topMovie.id)
-                  ? "fa-check"
-                  : "fa-plus"
-              }`}
-              aria-hidden="true"
-            ></i>{" "}
-            My List
+            {watchList?.some((item) => item.id === topMovie.id)
+              ? "✓ Added"
+              : "+ My List"}
           </button>
         </div>
-      </section>
+      )}
     </div>
   );
 }
