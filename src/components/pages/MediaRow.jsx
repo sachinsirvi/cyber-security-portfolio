@@ -97,7 +97,7 @@ function MediaRow({ endpoint, title }) {
               <div
                 key={movie.id}
                 onClick={() => handleCardClick(movie)}
-                className="min-w-[100px] sm:min-w-[150px] md:min-w-[250px] rounded overflow-hidden focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="min-w-[120px] sm:min-w-[150px] md:min-w-[250px] rounded overflow-hidden"
                 aria-label={`More info about ${movie.title || movie.name}`}
               >
                 <MovieCard

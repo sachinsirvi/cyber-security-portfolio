@@ -24,13 +24,12 @@ const MovieCard = React.memo(function MovieCard({
     openModal({
       Title: data?.title || data?.name,
       Description: data?.overview,
-      media_type: data?.media_type || "movie",  
+      media_type: data?.media_type || "movie",
       VideoId: data?.id,
       vote_average: data?.vote_average,
       popularity: data?.popularity,
     });
   };
-  
 
   // Handle watchlist toggle
   const handleWatchlistToggle = (e) => {
@@ -51,7 +50,7 @@ const MovieCard = React.memo(function MovieCard({
       tabIndex={0}
       onKeyDown={handleKeyDown}
       aria-label={`Open info for ${title}`}
-      className="relative w-full border-b-1 border-transparent hover:scale-105 hover:border-yellow-300 cursor-pointer transition-all duration-300 flex flex-col bg-neutral-950 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      className="relative w-full border-b-1 border-transparent hover:border-yellow-300 cursor-pointer transition-all duration-300 flex flex-col bg-neutral-950 rounded-md"
       onClick={infoModalToggle}
     >
       {/* Watchlist button */}
@@ -63,11 +62,10 @@ const MovieCard = React.memo(function MovieCard({
         }
         type="button"
         onClick={handleWatchlistToggle}
-        className={`absolute top-0 right-1 bg-black/20 border border-transparent text-gray-300 p-1 sm:p-2 md:p-3 hover:bg-yellow-300 hover:text-black transition-colors duration-300 cursor-pointer ${
-          isInWatchlist ? "text-yellow-300" : "text-gray-300"
-        }`}
-        icon={isInWatchlist ? "fa-check" : "fa-plus"}
-      />
+        className={`absolute top-0 right-0 bg-black/20 text-white border border-transparent p-2 md:p-3 hover:bg-yellow-300 hover:text-black transition-colors duration-300 cursor-pointer ${isInWatchlist ? "text-yellow-300" : "text-white"}`}
+      >
+        <i className={`fa-solid ${isInWatchlist ? "fa-check" : "fa-plus"}`} />
+      </button>
 
       {/* Poster */}
       <ImageWithFallback
@@ -78,7 +76,7 @@ const MovieCard = React.memo(function MovieCard({
         loading="lazy"
       />
 
-      {/* Title (not a heading, just text) */}
+      {/* Title */}
       <p className="hidden lg:block text-neutral-300 text-center bg-neutral-900 p-2 ">
         {title}
       </p>
