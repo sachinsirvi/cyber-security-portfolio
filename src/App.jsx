@@ -13,7 +13,7 @@ const TvShows = lazy(() => import("./components/pages/TvShows.jsx"));
 const MyWatchList = lazy(() => import("./components/pages/MyWatchList.jsx"));
 const Search = lazy(() => import("./components/pages/Search.jsx"));
 const NotFound = lazy(() => import("./components/pages/NotFound.jsx"));
-const LazyAIChatModal = lazy(() => import("./components/pages/AIChatModal.jsx"));
+const ChatBot = lazy(() => import("./components/pages/ChatBot.jsx"));
 
 // Lazy load layout
 const Footer = lazy(() => import("./components/layout/Footer.jsx"));
@@ -33,7 +33,7 @@ export default function App() {
             <Route path="/tvshows" element={<TvShows />} />
             <Route path="/watchlist" element={<MyWatchList />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/ai_chat" element={<LazyAIChatModal />} />
+            <Route path="/ai_chat" element={<ChatBot />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

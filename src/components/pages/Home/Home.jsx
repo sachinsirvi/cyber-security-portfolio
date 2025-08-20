@@ -17,12 +17,12 @@ function Home() {
         {/* Open Graph */}
         <meta property="og:title" content="Home - Premiere.AI" />
         <meta property="og:description" content="Discover the latest movies and TV shows on Premiere.AI." />
-        <meta property="og:image" content="https://image.tmdb.org/t/p/w780/sample.jpg" />
+        {/* <meta property="og:image" content="https://image.tmdb.org/t/p/w780/sample.jpg" /> */}
         <meta property="og:url" content="https://premiere-ai.netlify.app/" />
         <meta property="og:type" content="website" />
 
         {/* Preload LCP image (swap with Banner’s dynamic image later) */}
-        <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w780/sample.jpg" />
+        {/* <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w780/sample.jpg" /> */}
       </Helmet>
 
       <main className="w-full mx-auto">
