@@ -19,7 +19,7 @@ function Banner() {
   useEffect(() => {
     fetchTmdbApi(END_POINTS.movie.top_rated)
       .then((data) => {
-        setTopMovie(data.results?.[0] || null);
+        setTopMovie(data.results?.[3] || null);
         setLoading(false);
       })
       .catch((error) => {
