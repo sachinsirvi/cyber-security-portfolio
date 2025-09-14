@@ -1,68 +1,33 @@
-# 🎬 Premiere.AI  
+# 👩🏻‍💻 Jessica Sylvia Clement – Portfolio  
 
-**Premiere.AI** is a premium, sleek **movies & TV shows discovery platform** built with **React + Vite**.  
-It delivers a **fast, responsive, and accessible UI** powered by the **TMDB API**, featuring:  
-- Watchlist management  
-- AI assistant placeholder (ChatGPT-style integration ready)  
+Welcome to my **personal portfolio website**, built with **React + Vite**.  
+This is my **digital home** where I share my journey in **cybersecurity**, my **technical skills**, and the **projects, research, and articles** that I am passionate about.  
 
-**Live Demo:** [premiere-ai.netlify.app](https://premiere-ai.netlify.app/)  
-
-
+🌐 **Live Portfolio:** [your-portfolio-link.com](https://your-portfolio-link.com)  
 
 ---
 
-## Features
+## ✨ Features
 
-- **Explore Movies & TV Shows** – Browse trending, top-rated, and popular titles from [TMDB](https://www.themoviedb.org/documentation/api)  
-- **Smart Search** – Find movies & shows instantly  
-- **Personal Watchlist** – Save and manage your favorite titles  
-- **Fully Responsive** – Optimized for mobile, tablet, and desktop  
-- **High Performance** – Optimized with lazy loading, caching, and image fallbacks  
-- **AI Assistant (UI Ready)** – Chatbot placeholder for **OpenAI integration**  
-- **Premium UI/UX** – Smooth hover effects, loading spinners, accessibility support  
+- **Hero Section** – A warm introduction with my profile & tagline  
+- **Skills** – Technical skills, tools, and cybersecurity concepts presented in responsive cards  
+- **Projects & Writeups** – A showcase of my featured articles, research work, and hands-on projects  
+- **More Info** – Cards highlighting special achievements like speaking at TEDx, being featured in Women in Security Magazine, and leading RMIT InfoSec initiatives  
+- **Responsive Design** – Works seamlessly on desktop, tablet, and mobile  
+- **Interactive UI** – Smooth hover animations, transitions, and consistent glowing theme  
+- **404 Page** – Custom styled "Not Found" page with a call-to-action  
+- **AI Assistant Placeholder** – Future-ready chatbot to answer questions about me and guide navigation  
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Framework:** [React](https://react.dev/) + [Vite](https://vitejs.dev/)  
 - **Styling:** [TailwindCSS](https://tailwindcss.com/)  
 - **Routing:** [React Router](https://reactrouter.com/)  
-- **Icons:** [Font Awesome](https://fontawesome.com/)  
-- **API:** [TMDB](https://www.themoviedb.org/)  
+- **Icons:** [React Icons](https://react-icons.github.io/react-icons/)  
+- **SEO:** [React Helmet Async](https://github.com/staylor/react-helmet-async)  
 - **Hosting:** [Netlify](https://www.netlify.com/)  
 
 ---
 
-## Lighthouse Scores
-
-| Category        | Score |
-|-----------------|-------|
-| 🚀 Performance  | 92+   |
-| ♿ Accessibility | 94+   |
-| ✅ Best Practices | 100 |
-| 🌐 SEO          | 100 |
-
----
-
-## 🛠️ Installation & Setup
-
-```bash
-# Clone the repo
-git clone https://github.com/yourusername/premiere-ai.git
-
-# Enter project folder
-cd premiere-ai
-
-# Install dependencies
-npm install
-
-# Create .env file in root and add:
-VITE_TMDB_API_KEY=your_tmdb_api_key
-VITE_TMDB_ACCESS_TOKEN=your_tmdb_access_token
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build

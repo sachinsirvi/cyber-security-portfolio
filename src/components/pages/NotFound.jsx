@@ -1,19 +1,27 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <div className="p-10 flex flex-col items-center justify-center text-center min-h-[70vh] text-yellow-300">
-      <h1 className="text-3xl font-bold mb-2">404 - Page Not Found</h1>
-      <p className="text-gray-400 mb-4">
-        Oops! The page you are looking for does not exist.
+    <div className="flex flex-col items-center justify-center min-h-[80vh] bg-black text-center px-6 ">
+      
+      {/* Title */}
+      <h1 className="text-4xl font-bold text-green-500 mb-2">
+        404 - Page Not Found
+      </h1>
+
+      {/* Subtitle */}
+      <p className="text-gray-400 max-w-md mb-6">
+        Oops! The page you are looking for doesn't exist, has been moved, or you
+        might have mistyped the URL.
       </p>
+
+      {/* Go Home Button */}
       <Link
         to="/"
-        className="px-4 py-2 bg-yellow-300 text-black font-semibold rounded hover:bg-yellow-400 transition"
+        className="px-6 py-3 bg-green-600 text-black font-semibold rounded-lg shadow-[0_0_10px_2px_rgba(34,197,94,0.6)] hover:bg-green-500 hover:shadow-[0_0_15px_3px_rgba(34,197,94,0.8)] transition-all"
       >
-        Go Home
+        ⬅ Go Back Home
       </Link>
     </div>
   );

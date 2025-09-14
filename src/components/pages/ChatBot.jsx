@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {PROJECT_INSTRUCTIONS} from "../../lib/constants";
+import {PORTFOLIO_INSTRUCTIONS} from "../../lib/constants";
 
 function ChatBot() {
   const [message, setMessage] = useState("");
@@ -31,7 +31,7 @@ function ChatBot() {
           },
           body: JSON.stringify({
             contents: [
-              { role: "model", parts: [{ text: PROJECT_INSTRUCTIONS }] }, // instructions
+              { role: "model", parts: [{ text: PORTFOLIO_INSTRUCTIONS }] }, // instructions
               ...chatMessage.map((msg) => ({
                 role: msg.role === "user" ? "user" : "model",
                 parts: [{ text: msg.text }],
@@ -60,13 +60,12 @@ function ChatBot() {
       ]);
     }
   };
-  
 
   return (
     <div className="flex flex-col items-center bg-neutral-950 p-4 rounded-lg w-full">
-      <div className="bg-neutral-900 w-full md:w-[50vw] lg:w-[40vw] h-full rounded-lg p-4 justify-between flex flex-col shadow-md shadow-yellow-400">
-        <h3 className="text-center text-md font-semibold text-yellow-300 mb-4">
-          Ask Premiere.AI
+      <div className="bg-neutral-900 w-full md:w-[50vw] lg:w-[40vw] h-full rounded-lg p-4 justify-between flex flex-col shadow-md shadow-green-400">
+        <h3 className="text-center text-md font-semibold text-green-600 mb-4">
+          Ask Jess's AI
         </h3>
         {/* Outer Chat Window */}
         <div className="w-full h-[60vh] bg-neutral-950 mb-2 rounded-md  border-neutral-600 p-2 overflow-y-scroll">
@@ -77,7 +76,7 @@ function ChatBot() {
                 key={index}
                 className={`${
                   msg.role === "user"
-                    ? "flex justify-end text-yellow-300"
+                    ? "flex justify-end text-green-400"
                     : "flex justify-start "
                 }`}
               >
@@ -101,7 +100,7 @@ function ChatBot() {
           <button
             type="submit"
             aria-label="Send message"
-            className="p-1 rounded-md mt-2 text-center cursor-pointer text-yellow-300 border border-neutral-600 hover:bg-yellow-400 hover:text-black transition-colors duration-200"
+            className="p-1 rounded-md mt-2 text-center cursor-pointer text-green-600 border border-neutral-600 hover:bg-green-600 hover:text-black transition-colors duration-200"
           >
             Send
           </button>

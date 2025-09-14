@@ -1,52 +1,59 @@
-import React, { Suspense, lazy, useContext } from "react";
-import "./App.css";
-import Navbar from "./components/layout/Navbar.jsx";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import "./App.css";
+
+import Navbar from "./components/layout/Navbar.jsx";
 import LoadingFallback from "./components/common/LoadingFallback.jsx";
 import AiChatToggle from "./components/common/AiChatToggle.jsx";
-import { InfoModalContext } from "./context/InfoModalContext.jsx";
 
-// Lazy load route pages
+// Lazy-loaded pages
 const Home = lazy(() => import("./components/pages/Home/Home.jsx"));
-const Movies = lazy(() => import("./components/pages/Movies.jsx"));
-const TvShows = lazy(() => import("./components/pages/TvShows.jsx"));
-const MyWatchList = lazy(() => import("./components/pages/MyWatchList.jsx"));
-const Search = lazy(() => import("./components/pages/Search.jsx"));
-const NotFound = lazy(() => import("./components/pages/NotFound.jsx"));
+const Skills = lazy(() => import("./components/pages/Skills.jsx"));
+const Projects = lazy(() => import("./components/pages/Projects.jsx"));
+const Articles = lazy(() => import("./components/pages/Articles.jsx"));
+const Contact = lazy(() => import("./components/pages/Contact.jsx"));
 const ChatBot = lazy(() => import("./components/pages/ChatBot.jsx"));
+const NotFound = lazy(() => import("./components/pages/NotFound.jsx"));
 
-// Lazy load layout
+// Lazy-loaded layout
 const Footer = lazy(() => import("./components/layout/Footer.jsx"));
-const InfoModal = lazy(() => import("./components/common/InfoModal.jsx"));
+
+// Centralized route config
+const routes = [
+  { path: "/", element: <Home /> },
+  { path: "/about", element: <Home /> }, // If "About" is part of Home
+  { path: "/skills", element: <Skills /> },
+  { path: "/projects", element: <Projects /> },
+  { path: "/articles", element: <Articles /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/ai_chat", element: <ChatBot /> },
+  { path: "*", element: <NotFound /> },
+];
 
 export default function App() {
-  const { isModalOpen } = useContext(InfoModalContext);
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-black text-white">
+      {/* Navbar stays visible */}
       <Navbar />
+
+      {/* Main Content */}
       <main className="flex-grow">
         <Suspense fallback={<LoadingFallback text="Loading page…" />}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/tvshows" element={<TvShows />} />
-            <Route path="/watchlist" element={<MyWatchList />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/ai_chat" element={<ChatBot />} />
-            <Route path="*" element={<NotFound />} />
+            {routes.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))}
           </Routes>
         </Suspense>
       </main>
-      <Suspense fallback={<LoadingFallback text="Loading Footer…" />}>
+
+      {/* Footer (lazy-loaded) */}
+      <Suspense fallback={<LoadingFallback text="Loading footer…" />}>
         <Footer />
       </Suspense>
+
+      {/* AI Chat Toggle (always visible) */}
       <AiChatToggle />
-      {isModalOpen && (
-        <Suspense fallback={null}>
-          <InfoModal />
-        </Suspense>
-      )}
     </div>
   );
 }

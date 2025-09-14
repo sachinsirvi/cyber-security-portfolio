@@ -6,15 +6,15 @@ function Navbar() {
   const location = useLocation();
 
   const navlinks = [
-    { name: "Search", path: "/search" },
-    { name: "Home", path: "/", end: true },
-    { name: "Movies", path: "/movies" },
-    { name: "TV Shows", path: "/tvshows" },
-    { name: "Watchlist", path: "/watchlist" },
+    { name: "About", path: "/about" },
+    { name: "Skills", path: "/skills" },
+    { name: "Projects", path: "/projects" },
+    { name: "Articles", path: "/articles" },
+    { name: "Contact", path: "/contact" },
   ];
 
   const navlinkClassname = ({ isActive }) =>
-    isActive ? "text-yellow-300" : "text-neutral-300";
+    isActive ? "text-green-500" : "text-neutral-300";
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -28,13 +28,20 @@ function Navbar() {
         {/* Logo */}
         <Link
           to="/"
-          className="text-md font-semibold text-neutral-300 hover:text-yellow-300 transition-colors duration-300"
-          aria-label="Go to Premiere.AI Home"
+          className="text-md font-semibold text-neutral-300 hover:text-green-600 transition-colors duration-300"
+          aria-label="Go to Portfolio Home"
         >
           {location.pathname === "/" ? (
-            <h1 className="text-lg md:text-xl">Premiere.AI</h1>
+            <h1 className="text-lg md:text-xl">
+              {/* Show short name on small screens, full name on md+ */}
+              <span className="block md:hidden">Jessica</span>
+              <span className="hidden md:block">Jessica Sylvia Clement</span>
+            </h1>
           ) : (
-            <p className="text-lg md:text-xl">Premiere.AI</p>
+            <p className="text-lg md:text-xl">
+              <span className="block md:hidden">Jessica</span>
+              <span className="hidden md:block">Jessica Sylvia Clement</span>
+            </p>
           )}
         </Link>
 

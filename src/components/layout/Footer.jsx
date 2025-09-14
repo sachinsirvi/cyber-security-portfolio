@@ -10,29 +10,29 @@ function Footer() {
       {/* Copyright */}
       <p className="text-sm md:text-base">
         © {new Date().getFullYear()}{" "}
-        <span className="font-semibold">Premiere.AI</span>
+        <span className="font-semibold">Jessica Sylvia Clement - Portfolio</span>
       </p>
 
       {/* Creator + Social */}
       <div className="flex items-center space-x-4 mt-2 md:mt-0">
         <p className="text-sm md:text-base flex items-center">
           Built with{" "}
-          <span className="mx-1 text-yellow-300" aria-hidden="true">♡</span> by Sachin Sirvi
+          <span className="mx-1 text-green-600" aria-hidden="true">♡</span> by Jess
         </p>
 
         <ul className="flex  space-x-4 text-xl" aria-label="Social Media Links">
           <li>
             <a
-              href="https://www.linkedin.com/in/sachin-sirvi/"
+              href="https://www.linkedin.com/in/jessica-sylvia-clement/"
               target="_blank"
               rel="noopener noreferrer"
               title="LinkedIn"
-              className="hover:text-yellow-300 hover:scale-110 transition-transform duration-300"
+              className="hover:text-green-600 hover:scale-110 transition-transform duration-300"
             >
               <FaLinkedin aria-hidden="true" />
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href="https://github.com/sachinsirvi"
               target="_blank"
@@ -42,7 +42,7 @@ function Footer() {
             >
               <FaGithub aria-hidden="true" />
             </a>
-          </li>
+          </li> */}
           
         </ul>
       </div>
