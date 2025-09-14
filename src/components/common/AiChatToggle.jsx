@@ -40,7 +40,7 @@ function AiChatToggle() {
   };
 
   return (
-    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+    <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50">
       <Link to="/ai_chat" aria-label="AI Chat">
         <button
           className="cursor-pointer  md:w-10 md:h-10 flex items-center justify-center hover:border-green-600 hover:scale-120 transition-all duration-300"
