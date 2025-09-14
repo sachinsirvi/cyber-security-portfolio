@@ -9,7 +9,7 @@ import AiChatToggle from "./components/common/AiChatToggle.jsx";
 // Lazy-loaded pages
 const Home = lazy(() => import("./components/pages/Home/Home.jsx"));
 const Skills = lazy(() => import("./components/pages/Skills.jsx"));
-const Projects = lazy(() => import("./components/pages/Projects.jsx"));
+const Achievements = lazy(() => import("./components/pages/Home/MoreInfo.jsx"));
 const Articles = lazy(() => import("./components/pages/Articles.jsx"));
 const Contact = lazy(() => import("./components/pages/Contact.jsx"));
 const ChatBot = lazy(() => import("./components/pages/ChatBot.jsx"));
@@ -23,8 +23,8 @@ const routes = [
   { path: "/", element: <Home /> },
   { path: "/about", element: <Home /> }, // If "About" is part of Home
   { path: "/skills", element: <Skills /> },
-  { path: "/projects", element: <Projects /> },
-  { path: "/articles", element: <Articles /> },
+  { path: "/achievements", element: <Achievements /> },
+  { path: "/writeups", element: <Articles /> },
   { path: "/contact", element: <Contact /> },
   { path: "/ai_chat", element: <ChatBot /> },
   { path: "*", element: <NotFound /> },

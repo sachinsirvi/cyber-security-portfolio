@@ -5,10 +5,6 @@ import SkillCard from "../SkillCard";
 function Skills() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white px-6">
-      {/* Heading */}
-      <h2 className="text-2xl font-bold mb-10 text-neutral-400 tracking-widest">
-        TECHNICAL SKILLS
-      </h2>
 
       {/* Skills Grid */}
       <div className=" flex flex-col justify-center gap-4 max-w-2xl w-full">

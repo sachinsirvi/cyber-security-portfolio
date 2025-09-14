@@ -6,11 +6,11 @@ function Navbar() {
   const location = useLocation();
 
   const navlinks = [
-    { name: "About", path: "/about" },
+    { name: "About Me", path: "/about" },
     { name: "Skills", path: "/skills" },
-    { name: "Projects", path: "/projects" },
-    { name: "Articles", path: "/articles" },
-    { name: "Contact", path: "/contact" },
+    { name: "Achievements", path: "/achievements" },
+    { name: "Writeups", path: "/writeups" },
+    { name: "Contact Me", path: "/contact" },
   ];
 
   const navlinkClassname = ({ isActive }) =>

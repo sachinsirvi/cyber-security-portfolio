@@ -32,17 +32,17 @@ function Footer() {
               <FaLinkedin aria-hidden="true" />
             </a>
           </li>
-          {/* <li>
+          <li>
             <a
-              href="https://github.com/sachinsirvi"
+              href="https://github.com/jessica-sylvia-clement"
               target="_blank"
               rel="noopener noreferrer"
               title="GitHub"
-              className="hover:text-yellow-300 hover:scale-110 transition-transform duration-300"
+              className="hover:text-green-600 hover:scale-110 transition-transform duration-300"
             >
               <FaGithub aria-hidden="true" />
             </a>
-          </li> */}
+          </li>
           
         </ul>
       </div>

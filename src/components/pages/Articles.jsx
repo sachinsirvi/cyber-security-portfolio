@@ -6,10 +6,6 @@ import article2Image from "../../assets/Article2.png";
 function Articles() {
   return (
 <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white px-6">
-  {/* Heading */}
-  <h2 className="text-2xl font-bold mb-10 text-neutral-400 tracking-widest">
-       My WRITEUPS
-      </h2>
 
   {/* Articles */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
