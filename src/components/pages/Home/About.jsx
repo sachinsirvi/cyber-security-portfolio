@@ -3,7 +3,7 @@ import JessProfile from "../../../assets/JessProfile.jpeg";
 
 function About() {
   return (
-    <div className="flex flex-col items-center justify-center gap-6 md:gap-12 bg-gradient-to-t from-green-900 to-green-80 md:h-[94vh] py-10 md:py-0">
+    <div className="flex flex-col items-center justify-center gap-6 md:gap-6 bg-gradient-to-t from-green-900 to-green-80 md:h-[94vh] py-10 md:py-0">
       {/* Heading */}
       <h2 className="text-2xl md:text-6xl font-bold text-neutral-100 ">
         Hi I'm Jessica!🙋🏻‍♀️

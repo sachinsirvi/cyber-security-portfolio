@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/layout/Navbar.jsx";
 import LoadingFallback from "./components/common/LoadingFallback.jsx";
 import AiChatToggle from "./components/common/AiChatToggle.jsx";
+import ArticleDetail from "./components/pages/ArticleDetail.jsx";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./components/pages/Home/Home.jsx"));
@@ -25,6 +26,7 @@ const routes = [
   { path: "/skills", element: <Skills /> },
   { path: "/achievements", element: <Achievements /> },
   { path: "/writeups", element: <Articles /> },
+  { path: "/writeups/:id", element: <ArticleDetail /> },
   { path: "/contact", element: <Contact /> },
   { path: "/ai_chat", element: <ChatBot /> },
   { path: "*", element: <NotFound /> },
