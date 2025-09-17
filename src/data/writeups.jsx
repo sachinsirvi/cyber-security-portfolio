@@ -69,4 +69,20 @@ export const articles = [
       </>
     ),
   },
+  {
+    id: "test3",
+    title: "A Test 3",
+    image: article2Image,
+    summary: <p>🛰️ This one opens rewdw inside the app.</p>,
+    external: false,
+    content: (
+      <>
+        <p>This is the detailed view for the "Test" article.</p>
+        <p>
+          You can add as much content as you want here — text, images, code
+          snippets, etc.
+        </p>
+      </>
+    ),
+  },
 ];
